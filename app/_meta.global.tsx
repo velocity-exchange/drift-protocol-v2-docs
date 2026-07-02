@@ -12,14 +12,14 @@ USAGE:
 */
 const META = {
   "protocol": {
-    "title": "Drift Protocol",
+    "title": "Velocity Protocol",
     "type": "page",
     "items": {
-      "index": "Drift Overview",
+      "index": "Velocity Overview",
       "about-v3": {
-        "title": "About Drift v3",
+        "title": "About Velocity",
         "items": {
-          "index": "Understanding Drift",
+          "index": "Understanding Velocity",
           "drift-amm": "",
           "decentralized-orderbook": "",
           "keepers": {
@@ -139,6 +139,7 @@ const META = {
       "market-makers": {
         "title": "Market Makers",
         "items": {
+          "index": "",
           "market-maker-participation": "",
           "maker-fee-rebate": "",
         }
@@ -155,9 +156,6 @@ const META = {
         "items": {
           "index": "",
           "referral-links": "",
-          "wlfi-trading-campaign": {
-            "display": displayWip,
-          },
         },
       },
       "risk-and-safety": {
@@ -171,7 +169,6 @@ const META = {
             display: 'hidden',
           },
           "risks": "",
-          "drift-safety-module": "",
         }
       },
       "glossary": "",

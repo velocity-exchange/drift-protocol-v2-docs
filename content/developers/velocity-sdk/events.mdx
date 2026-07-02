@@ -142,9 +142,13 @@ The `EventSubscriber` keeps a rolling buffer of recent events in memory. You can
 Retrieve all stored events of a given type:
 
 ```js
-// Returns all events of this type currently in memory
+// Returns all events of this type currently in memory (snapshotted into an array)
 const eventType = "OrderActionRecord";
-const events = eventSubscriber.getEventsReceived(eventType);
+const events = eventSubscriber.getEventsArray(eventType);
+
+// Prefer getEventList() when iterating without copying — it returns the
+// live, size-bounded EventList the subscriber inserts into directly.
+const eventList = eventSubscriber.getEventList(eventType);
 ```
 
 Retrieve all events from a specific transaction:

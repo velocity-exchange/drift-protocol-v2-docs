@@ -43,7 +43,31 @@ console.log(getConfig().QUOTE_MINT_ADDRESS);
   </TypeScript>
 </SDKDoc>
 
-On devnet, spot market index 0 is `dUSDT` (a placeholder quote token, 1e6 precision) rather than real USDC — mint it from the [token faucet](/developers/velocity-sdk/precision-and-types) or devnet tooling before depositing. On mainnet-beta the quote asset is still USDC at its original mint address.
+On devnet, spot market index 0 is `dUSDT` (a placeholder quote token, 1e6 precision) rather than real USDC — mint it from the SDK's `TokenFaucet` helper before depositing. On mainnet-beta the quote asset is still USDC at its original mint address.
+
+<SDKDoc>
+  <TypeScript name="TokenFaucet" type="class">
+```js
+import { TokenFaucet, BN } from "@velocity-exchange/sdk";
+import { PublicKey } from "@solana/web3.js";
+
+// <FAUCET_PROGRAM_ID> is the devnet token-faucet program's own program ID
+// (a separate deployment from the Velocity program), not documented here as a
+// fixed constant — obtain it from your devnet environment/deploy config.
+const tokenFaucet = new TokenFaucet(
+  connection,
+  wallet,
+  new PublicKey("<FAUCET_PROGRAM_ID>"),
+  new PublicKey("GqmEqYsy8EyvofDpmtFxK8zhYrgWgNokAtYoduQdL7v6") // dUSDT mint (devnet)
+);
+
+const [associatedTokenAccount] = await tokenFaucet.createAssociatedTokenAccountAndMintTo(
+  wallet.publicKey,
+  new BN(1_000_000_000) // 1,000 dUSDT at 1e6 precision
+);
+```
+  </TypeScript>
+</SDKDoc>
 
 ### Wallet / Authentication
 
