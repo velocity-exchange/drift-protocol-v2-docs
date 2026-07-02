@@ -202,8 +202,8 @@ const META = {
           "account-model": ""
         }
       },
-      "drift-sdk": {
-        "title": "Drift SDK",
+      "velocity-sdk": {
+        "title": "Velocity SDK",
         "items": {
           "setup": "",
           "precision-and-types": "",
@@ -286,7 +286,7 @@ const META = {
         "title": "CONTRIBUTE",
         "type": "separator"
       },
-      "contributing-to-drift": "Contributing to Drift"
+      "contributing-to-velocity": "Contributing to Velocity"
     }
   }
 } as MetaRecord;
