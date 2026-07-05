@@ -2,6 +2,7 @@ import "nextra-theme-docs/style.css";
 import "../styles/theme.css";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { headers } from "next/headers";
 import { Footer, Layout, Navbar } from "nextra-theme-docs";
 import { getPageMap } from "nextra/page-map";
 import { Logo } from "../components/Logo";
@@ -54,6 +55,19 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const isGated = (await headers()).get("x-coming-soon") === "1";
+
+  // Pre-launch gate: skip the docs shell (navbar/sidebar/search/footer)
+  // entirely so the coming-soon page can't leak the docs nav tree.
+  // Remove middleware.ts to lift the gate; no change needed here.
+  if (isGated) {
+    return (
+      <html lang="en" suppressHydrationWarning>
+        <body>{children}</body>
+      </html>
+    );
+  }
+
   const pageMap = await getPageMap();
 
   return (

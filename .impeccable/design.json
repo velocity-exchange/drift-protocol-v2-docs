@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-05T00:00:00.000Z",
+  "title": "Design System: Velocity Exchange Docs",
+  "extensions": {
+    "colorMeta": {
+      "velocity-green": {
+        "role": "primary",
+        "displayName": "Velocity Green",
+        "canonical": "oklch(0.560 0.170 148)",
+        "tonalRamp": [
+          "oklch(0.18 0.06 148)",
+          "oklch(0.28 0.09 148)",
+          "oklch(0.38 0.12 148)",
+          "oklch(0.48 0.15 148)",
+          "oklch(0.56 0.17 148)",
+          "oklch(0.66 0.16 148)",
+          "oklch(0.78 0.13 148)",
+          "oklch(0.90 0.08 148)"
+        ]
+      },
+      "info-blue": {
+        "role": "secondary",
+        "displayName": "Info Blue",
+        "canonical": "oklch(0.520 0.170 252)",
+        "tonalRamp": ["oklch(0.18 0.06 252)", "oklch(0.30 0.10 252)", "oklch(0.42 0.14 252)", "oklch(0.52 0.17 252)", "oklch(0.62 0.15 252)", "oklch(0.72 0.12 252)", "oklch(0.84 0.08 252)", "oklch(0.94 0.03 252)"]
+      },
+      "warn-amber": {
+        "role": "secondary",
+        "displayName": "Warn Amber",
+        "canonical": "oklch(0.585 0.135 68)",
+        "tonalRamp": ["oklch(0.20 0.05 68)", "oklch(0.32 0.08 68)", "oklch(0.44 0.11 68)", "oklch(0.585 0.135 68)", "oklch(0.68 0.13 68)", "oklch(0.78 0.11 68)", "oklch(0.88 0.07 68)", "oklch(0.95 0.03 68)"]
+      },
+      "danger-red": {
+        "role": "secondary",
+        "displayName": "Danger Red",
+        "canonical": "oklch(0.540 0.200 27)",
+        "tonalRamp": ["oklch(0.18 0.07 27)", "oklch(0.28 0.12 27)", "oklch(0.40 0.16 27)", "oklch(0.540 0.200 27)", "oklch(0.64 0.18 27)", "oklch(0.76 0.14 27)", "oklch(0.86 0.09 27)", "oklch(0.95 0.03 27)"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "oklch(0.180 0.013 150)"
+      },
+      "gray-600": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "oklch(0.420 0.018 150)"
+      },
+      "surface-light": {
+        "role": "neutral",
+        "displayName": "Signal Surface (Light)",
+        "canonical": "#F2F6F3"
+      },
+      "surface-dark": {
+        "role": "neutral",
+        "displayName": "Signal Surface (Dark)",
+        "canonical": "#060907"
+      }
+    },
+    "typographyMeta": {
+      "title": { "displayName": "Title", "purpose": "Page-level headings and empty-state titles." },
+      "body": { "displayName": "Body", "purpose": "All prose copy, capped near 65-75ch." },
+      "label": { "displayName": "Label / Mono", "purpose": "Error codes and small technical captions." }
+    },
+    "shadows": [
+      {
+        "name": "mark-glow",
+        "value": "drop-shadow(0 6px 20px color-mix(in oklab, #08AA18 35%, transparent))",
+        "purpose": "Reserved for the single centered brand mark icon on empty-state / dead-end screens."
+      }
+    ],
+    "motion": [
+      {
+        "name": "rise-and-fade",
+        "value": "translateY(10px)->none, opacity 0->1, 0.55s cubic-bezier(0.22, 1, 0.36, 1), ~60ms stagger per element",
+        "purpose": "Default entrance for empty-state screens. Fully visible without motion; only applies under prefers-reduced-motion: no-preference."
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single call-to-action on empty-state and dead-end screens.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\"><svg class=\"ds-btn-arrow\" width=\"16\" height=\"16\" viewBox=\"0 0 16 16\" fill=\"none\" aria-hidden=\"true\"><path d=\"M10 3.5 5.5 8l4.5 4.5\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>Back to docs home</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; height: 2.875rem; padding-inline: 1.25rem; border-radius: 8px; font-size: 0.9375rem; font-weight: 600; background: oklch(0.560 0.170 148); color: #fff; text-decoration: none; transition: background 160ms cubic-bezier(0.22, 1, 0.36, 1), transform 160ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { background: oklch(0.44 0.145 150); } .ds-btn-primary:active { transform: translateY(1px); } .ds-btn-primary:focus-visible { outline: 2px solid oklch(0.560 0.170 148); outline-offset: 2px; } .ds-btn-arrow { transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover .ds-btn-arrow { transform: translateX(-3px); }"
+    },
+    {
+      "name": "Important Callout",
+      "kind": "custom",
+      "refersTo": "callout-important",
+      "description": "Nextra callout re-mapped to the brand green; body copy stays ink so it always clears AA.",
+      "html": "<div class=\"ds-callout\"><div class=\"ds-callout-icon\">!</div><div class=\"ds-callout-body\">Important: this behavior only applies on mainnet.</div></div>",
+      "css": ".ds-callout { display: flex; gap: 0.75rem; padding: 1rem; border-radius: 3px; background: color-mix(in oklab, oklch(0.560 0.170 148) 12%, #F2F6F3); border: 1px solid color-mix(in oklab, oklch(0.560 0.170 148) 60%, transparent); color: oklch(0.180 0.013 150); } .ds-callout-icon { color: oklch(0.560 0.170 148); font-weight: 700; }"
+    },
+    {
+      "name": "Empty State",
+      "kind": "custom",
+      "refersTo": "empty-state",
+      "description": "Centered mark + label + title + body + one action + secondary links. Canonical pattern for 404 and the coming-soon gate.",
+      "html": "<div class=\"ds-empty\"><div class=\"ds-empty-mark\">●</div><p class=\"ds-empty-label\">Status</p><h1 class=\"ds-empty-title\">Coming soon</h1><p class=\"ds-empty-desc\">The docs aren't live yet. Check back soon, or follow along on Discord.</p></div>",
+      "css": ".ds-empty { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0; max-width: 34rem; margin-inline: auto; padding: 3rem 1.5rem; } .ds-empty-mark { width: 64px; height: 64px; color: oklch(0.560 0.170 148); filter: drop-shadow(0 6px 20px color-mix(in oklab, #08AA18 35%, transparent)); } .ds-empty-label { margin-top: 1.5rem; font-family: ui-monospace, monospace; font-size: 0.8125rem; letter-spacing: 0.02em; color: oklch(0.420 0.018 150); } .ds-empty-title { margin-top: 0.5rem; font-size: clamp(1.5rem, 7vw, 2rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; color: oklch(0.180 0.013 150); } .ds-empty-desc { margin-top: 0.875rem; max-width: 30rem; font-size: 1rem; line-height: 1.6; color: oklch(0.420 0.018 150); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Signal Green",
+    "overview": "The docs are a near-monochrome technical surface — a light near-white or near-black neutral, tinted a whisper toward the brand's own green hue so it never reads as generic gray. Against that quiet field, exactly one color is allowed to mean something: Velocity Green. It marks the logo, the primary action, the active nav tab, and the \"important\" callout — the four places a reader needs a signal, not decoration. Everything else stays in ink and neutral so the green never competes with itself. This system explicitly rejects hype-driven marketing chrome: no gradients, no countdown timers, no glassmorphism, no oversized hero stats.",
+    "keyCharacteristics": [
+      "One accent color (Velocity Green) carries all signal; neutrals carry everything else.",
+      "Callouts use accent-as-border-and-icon, not accent-as-background-wash, so body text always clears AA.",
+      "Flat by default — the only shadow in the system is a soft green glow under the mark icon on empty-state screens.",
+      "Motion is a rise-and-fade on load, staggered by ~60ms per element, never more."
+    ],
+    "rules": [
+      { "name": "The One Signal Rule", "body": "Velocity Green appears in exactly one semantic role per screen: the thing the reader should act on. It is never used decoratively.", "section": "colors" },
+      { "name": "The Ink-Not-Wash Rule", "body": "Callout body copy is always set in ink, never in the accent hue. The accent carries the border and the leading icon only.", "section": "colors" },
+      { "name": "The No-Overflow Rule", "body": "Any large clamp-scaled heading must be tested against its actual copy at the narrowest supported width; if it overflows, shrink the clamp max before rewriting the copy.", "section": "typography" },
+      { "name": "The Flat-by-Default Rule", "body": "Nothing gets a shadow just because it's a container. Shadows are earned by exactly one component role (the empty-state mark), never applied broadly for depth.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do keep Velocity Green to one semantic role per screen — the primary action or the one thing that matters.",
+      "Do set callout and empty-state body copy in ink, never in the accent hue.",
+      "Do reuse the empty-state pattern (mark → label → title → body → one action → secondary links) for the coming-soon gate.",
+      "Do gate every animation behind prefers-reduced-motion: no-preference, with a fully-visible default state."
+    ],
+    "donts": [
+      "Don't use marketing-campaign styling — no gradients, no countdown timers, no hero stat rows, no email-capture forms.",
+      "Don't use background-clip: text gradient headlines; emphasis comes from weight and size only.",
+      "Don't apply glassmorphism or decorative blur; the system is flat by design.",
+      "Don't introduce a second accent color for \"variety\" — every non-green hue in this system is semantic (info/warn/danger) and callout-only.",
+      "Don't let large clamp-scaled titles overflow on narrow viewports; test the actual copy at the smallest supported width."
+    ]
+  }
+}
