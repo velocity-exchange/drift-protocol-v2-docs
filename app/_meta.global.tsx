@@ -28,8 +28,8 @@ const META = {
             "items": {
               "index": "",
               "phantom-wallet": "",
-              "metamask": "",
               "passwordless-login": "",
+              "wallet-faq": "Wallet FAQ",
             },
           },
           "cross-collateral-deposits": "",
@@ -111,13 +111,7 @@ const META = {
           },
         }
       },
-      "rewards": {
-        "title": "Rewards",
-        "items": {
-          "index": "",
-          "referral-links": "",
-        },
-      },
+      "rewards": "Referral Links",
       "glossary": "",
       "--- how-it-works": {
         "title": "HOW VELOCITY WORKS",
@@ -223,6 +217,7 @@ const META = {
           "orders": "",
           "pnl-risk": "",
           "events": "",
+          "dlob": "DLOB",
           "swaps": "",
           "swift": "",
           "builder-codes": "",
