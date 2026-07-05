@@ -26,6 +26,15 @@
   --vlc-callout-ink: oklch(0.300 0.020 150);
   --vlc-tint: 12%;
 
+  /* Action + link greens. The site's --x-color-primary-600 only reaches
+     ~2.5:1 on the light surface, so it can't carry white-text buttons or
+     body-sized links here. These are the AA-safe brand greens:
+     --vlc-action holds white text at 5.5:1 in both themes; --vlc-link
+     clears 5:1 on the light surface. */
+  --vlc-action: oklch(0.5 0.15 150);
+  --vlc-action-hover: oklch(0.44 0.145 150);
+  --vlc-link: oklch(0.5 0.15 150);
+
   --nextra-navbar-height: 100px;
 }
 
@@ -53,6 +62,10 @@
   --vlc-danger: oklch(0.700 0.180 27);
   --vlc-callout-ink: oklch(0.920 0.012 150);
   --vlc-tint: 20%;
+
+  /* --vlc-action stays fixed (white text on it clears AA on either bg).
+     On the dark surface the site green already reaches ~12:1, so links use it. */
+  --vlc-link: var(--x-color-primary-600);
 }
 
 html,

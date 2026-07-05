@@ -84,20 +84,20 @@
   border-radius: 8px;
   font-size: 0.9375rem;
   font-weight: 600;
-  /* fixed forest green so white text clears 5.5:1 in both themes */
-  background: oklch(0.5 0.15 150);
+  /* AA-safe brand green (white text clears 5.5:1 in both themes) */
+  background: var(--vlc-action);
   color: #fff;
   transition: background 160ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 160ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .button:hover {
-  background: oklch(0.44 0.145 150);
+  background: var(--vlc-action-hover);
 }
 .button:active {
   transform: translateY(1px);
 }
 .button:focus-visible {
-  outline: 2px solid oklch(0.5 0.15 150);
+  outline: 2px solid var(--vlc-action);
   outline-offset: 2px;
 }
 .arrow {
@@ -122,19 +122,18 @@
   color: var(--x-color-gray-600);
 }
 .links a {
-  /* Light: a deeper green than the site's --x-color-primary-600, which only
-     reaches 2.5:1 on the light surface. Dark: the site green already clears
-     12:1, so we defer to it for consistency (rule below). */
-  color: oklch(0.5 0.15 150);
+  color: var(--vlc-link);
   font-weight: 500;
   text-decoration: none;
   text-underline-offset: 3px;
-}
-:global(.dark) .links a {
-  color: var(--x-color-primary-600);
+  border-radius: 3px;
 }
 .links a:hover {
   text-decoration: underline;
+}
+.links a:focus-visible {
+  outline: 2px solid var(--vlc-link);
+  outline-offset: 3px;
 }
 .dot {
   color: var(--x-color-gray-300);
