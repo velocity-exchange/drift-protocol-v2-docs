@@ -14,7 +14,7 @@ For cancelling orders (that can be cancelled, see [Advanced Orders FAQ](/protoco
 
 Liquidation rewards for keepers are set per-market (`liquidator_fee`) and read directly from each market's on-chain account — check `PerpMarketAccount.liquidatorFee` / `SpotMarketAccount.liquidatorFee` for current values.
 
-Currently, the USDC reward function for keepers (_f_keeper_) is designed as:
+Currently, the USDT reward function for keepers (_f_keeper_) is designed as:
 
 $
 f_{\text{keeper}} = \textit{min}(0.01 \ast 

@@ -1,8 +1,8 @@
 # Trading Fees
 
-Velocity offers a highly competitive fee structure with low taker fees and a flat maker rebate, with the potential for even lower fees as trading volume increases. Fees are calculated per trade based on the filled notional position size and are charged in the market's quote asset (USDC), affecting the position's cost basis.
+Velocity offers a highly competitive fee structure with low taker fees and a flat maker rebate, with the potential for even lower fees as trading volume increases. Fees are calculated per trade based on the filled notional position size and are charged in the market's quote asset (USDT), affecting the position's cost basis.
 
-If a user holds only non-USDC assets, a USDC borrow may be triggered upon settlement of a loss in perpetual markets (see [P&L](/protocol/trading/profit-loss)).
+If a user holds only non-USDT assets, a USDT borrow may be triggered upon settlement of a loss in perpetual markets (see [P&L](/protocol/trading/profit-loss)).
 
 Velocity's tiered fees for futures markets are based **only** on an on-chain calculation of **30-Day Volume** — there is no governance-token staking discount. (Drift's DRIFT-staking fee discount was removed as part of the [fee redesign](#fee-redesign).)
 
@@ -27,37 +27,37 @@ Tier is selected purely by the account's trailing 30-day perp volume; the maker 
   <tbody>
     <tr>
       <td>0</td>
-      <td>&lt; $2M</td>
+      <td>&lt; &#36;2M</td>
       <td>0.100%</td>
       <td>-0.020%</td>
     </tr>
     <tr>
       <td>1</td>
-      <td>$2M – $10M</td>
+      <td>&#36;2M – &#36;10M</td>
       <td>0.090%</td>
       <td>-0.020%</td>
     </tr>
     <tr>
       <td>2</td>
-      <td>$10M – $20M</td>
+      <td>&#36;10M – &#36;20M</td>
       <td>0.080%</td>
       <td>-0.020%</td>
     </tr>
     <tr>
       <td>3</td>
-      <td>$20M – $80M</td>
+      <td>&#36;20M – &#36;80M</td>
       <td>0.070%</td>
       <td>-0.020%</td>
     </tr>
     <tr>
       <td>4</td>
-      <td>$80M – $200M</td>
+      <td>&#36;80M – &#36;200M</td>
       <td>0.060%</td>
       <td>-0.020%</td>
     </tr>
     <tr>
       <td>5 (VIP)</td>
-      <td>&ge; $200M</td>
+      <td>&ge; &#36;200M</td>
       <td>0.050%</td>
       <td>-0.020%</td>
     </tr>

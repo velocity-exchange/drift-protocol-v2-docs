@@ -23,7 +23,7 @@ The Insurance Fund is **100% staker-owned** on Velocity — there is no protocol
 <Callout type="important">
 **Example:**
 
-The Insurance Fund is at \$5000 USDC. You decide to stake \$10,000 USDC, bringing the total to \$15,000 USDC. Your proportionate share of the fund is 10000/15000 = 66.6%.
+The Insurance Fund is at \$5000 USDT. You decide to stake \$10,000 USDT, bringing the total to \$15,000 USDT. Your proportionate share of the fund is 10000/15000 = 66.6%.
 
 Each hour, as the revenue pool settles fees earned to the Insurance Fund, let's say \$30 is settled — all \$30 accrues to stakers as share-price appreciation, none to the protocol. You will receive 66.6% of that value (\$20) and the remaining Insurance Fund stakers would receive 33.3% (\$10).
 
@@ -41,35 +41,3 @@ There is a cooldown period of 13 days for unstaking any collateral from the Insu
 A user first requests to unstake a specific amount (denominated in shares). During the cooldown period, the staked amount does not receive rewards. After the elapsed period, the user can fully unstake. 
 
 *Note: You cannot unstake while the spot market utilization (or 1hr utilization twap) is above 80%. This does not affect opening/timing on unstake requests.*
-
-
-### How to stake to Insurance Fund Vault
-
-1. Select the vault and click `Stake`
-
-<img src="/assets/1-if-choose-vault.png" alt="health-modal" width="500" height="auto"></img>
-
-2. In the modal, enter the amount you'd like to stake
-
-<img src="/assets/2-if-confirm-stake.png" alt="health-modal" width="500" height="auto"></img>
-
-3. Click `Confirm Stake`
-
-
-### How to unstake from Insurance Fund Vault
-
-<Callout type="warning">
-Funds will be available to withdraw 13 days after making an unstake request.
-
-You can only have one pending unstake request per vault at a time. You can cancel a request at any time, noting your 13 day cool down period will restart upon any new unstake request. 
-</Callout>
-
-You can unstake from the Insurance Fund page:
-
-1. Click `Unstake`
-
-<img src="/assets/3-if-unstake.png" alt="health-modal" width="500" height="auto"></img>
-
-2. Select the amount you'd like to unstake and click `Request Unstake`
-
-<img src="/assets/4-if-request-unstake.png" alt="health-modal" width="500" height="auto"></img>

@@ -22,17 +22,17 @@ Cross collateral (default accounts for Velocity) shares a single collateral pool
 ### Example - Cross Collateral Pool
 1. **Deposit Collateral**: Deposit 1000 JLP into your account.
 2. **Open a BTC Long Position**: Use some of the JLP as collateral to open a leveraged SOL long position.
-3. **Open a USDC Borrow Position**: Simultaneously borrow USDC using the same JLP collateral.
+3. **Open a USDT Borrow Position**: Simultaneously borrow USDT using the same JLP collateral.
 4. **Risk Management**:
     - Both positions rely on the same JLP collateral.
-    - If JLP's value drops significantly, both the SOL and USDC positions may face liquidation.
+    - If JLP's value drops significantly, both the SOL and USDT positions may face liquidation.
 </Callout>
 
 <Callout type="info">
 ### Example - Isolated Pool
-1. **Choose an Isolated Pool**: Select a JLP/USDC pool 
+1. **Choose an Isolated Pool**: Select a JLP/USDT pool 
 2. **Deposit Collateral**: Deposit 1000 JLP into the pool.
-3. **Open a Leveraged Position**: Borrow USDC and swap into JLP. Borrow more USDC based on the new deposit of JLP and swap into JLP, creating a leveraged exposure to JLP. You can now earn higher yield on your initial deposit of 1000 JLP
+3. **Open a Leveraged Position**: Borrow USDT and swap into JLP. Borrow more USDT based on the new deposit of JLP and swap into JLP, creating a leveraged exposure to JLP. You can now earn higher yield on your initial deposit of 1000 JLP
 4. **Risk Management**:
     - If JLP’s price drops, only this pool’s position is at risk of liquidation.
     - Other pools or positions you hold remain unaffected. At the same time, you’ll not be able to use the token deposited in isolated pool for other positions.
@@ -43,7 +43,7 @@ Cross collateral (default accounts for Velocity) shares a single collateral pool
 
 | **Pool** | **Assets** |
 | --- | --- |
-| JLP Isolated Pool | JLP, USDC |
+| JLP Isolated Pool | JLP, USDT |
 
 ### How to deposit into an isolated pool
 

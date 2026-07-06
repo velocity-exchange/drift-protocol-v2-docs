@@ -21,7 +21,7 @@ All subaccounts under the same wallet share cross-margin, but transfers let you 
 <SDKDoc>
   <TypeScript name="transferDeposit" type="method" owner="VelocityClient">
 ```js
-const marketIndex = 0; // e.g. USDC
+const marketIndex = 0; // e.g. USDT
 const amount = velocityClient.convertToSpotPrecision(marketIndex, 100);
 
 // transferDeposit(amount, marketIndex, fromSubAccountId, toSubAccountId)
@@ -51,7 +51,7 @@ await velocityClient.transferPerpPosition(0, 1, 0, amount);
 <SDKDoc>
   <TypeScript name="transferPools" type="method" owner="VelocityClient">
 ```js
-const depositAmount = velocityClient.convertToSpotPrecision(0, 100); // 100 USDC
+const depositAmount = velocityClient.convertToSpotPrecision(0, 100); // 100 USDT
 const borrowAmount = velocityClient.convertToSpotPrecision(1, 1);    // 1 SOL
 
 // transferPools(depositFromMarketIndex, depositToMarketIndex, borrowFromMarketIndex,
@@ -69,7 +69,7 @@ await velocityClient.transferPools(0, 0, 1, 1, depositAmount, borrowAmount, 0, 1
   <TypeScript name="transferIsolatedPerpPositionDeposit" type="method" owner="VelocityClient">
 ```js
 const perpMarketIndex = 0;
-const amount = velocityClient.convertToSpotPrecision(0, 100); // deposit 100 USDC into the isolated position
+const amount = velocityClient.convertToSpotPrecision(0, 100); // deposit 100 USDT into the isolated position
 
 // transferIsolatedPerpPositionDeposit(amount, perpMarketIndex, subAccountId?, txParams?, trySettle?, noBuffer?)
 await velocityClient.transferIsolatedPerpPositionDeposit(amount, perpMarketIndex);
@@ -99,7 +99,7 @@ Once opted in, a delegate can call `transferDepositByDelegate` with the same arg
   <TypeScript name="transferDepositByDelegate" type="method" owner="VelocityClient">
 ```js
 // velocityClient here is subscribed with the delegate wallet, not the authority.
-const marketIndex = 0; // e.g. USDC
+const marketIndex = 0; // e.g. USDT
 const amount = velocityClient.convertToSpotPrecision(marketIndex, 100);
 
 // transferDepositByDelegate(amount, marketIndex, fromSubAccountId, toSubAccountId)

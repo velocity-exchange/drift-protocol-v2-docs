@@ -28,12 +28,10 @@ const META = {
             "items": {
               "index": "",
               "phantom-wallet": "",
-              "passwordless-login": "",
               "wallet-faq": "Wallet FAQ",
             },
           },
           "cross-collateral-deposits": "",
-          "place-your-first-trade": "",
           "managing-subaccounts": "",
           "delegated-accounts": "",
           "versioned-transactions": "",
@@ -47,12 +45,10 @@ const META = {
             "title": "Perpetuals Trading",
             "items": {
               "index": "",
-              "perpetuals-trading": "",
               "auction-parameters": "",
               "funding-rates": "",
             }
           },
-          "spot-trading": "Spot Trading",
           "margin": {
             "title": "Margin",
             "items": {
@@ -91,7 +87,6 @@ const META = {
             }
           },
           "market-specs": "",
-          "prelaunch-markets": "",
         }
       },
       "borrow-lend": {
