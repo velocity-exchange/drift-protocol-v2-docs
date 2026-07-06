@@ -49,4 +49,6 @@ Per-market leverage logic is implemented in:
 * `state/user.rs` stores `max_margin_ratio` on the `PerpPosition` struct
 * `VelocityClient.updateUserPerpPositionCustomMarginRatio` (`@velocity-exchange/sdk`, `velocityClient.ts`) updates per-position settings
 
+{/* HIDDEN: isolated positions — temporarily hidden, reinstate later.
 This is independent of [isolated positions](/protocol/trading/margin) — per-market leverage caps a position's margin ratio, while isolated positions segregate a position's collateral and liquidation from the rest of the subaccount; the two can be combined.
+*/}
