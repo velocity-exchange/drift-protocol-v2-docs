@@ -41,14 +41,8 @@ const META = {
       "trading": {
         "title": "Trading",
         "items": {
-          "perpetuals-trading": {
-            "title": "Perpetuals Trading",
-            "items": {
-              "index": "",
-              "auction-parameters": "",
-              "funding-rates": "",
-            }
-          },
+          "auction-parameters": "",
+          "funding-rates": "",
           "margin": {
             "title": "Margin",
             "items": {
