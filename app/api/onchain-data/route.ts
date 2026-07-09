@@ -66,10 +66,21 @@ function stripPoolId(symbol: string): string {
     : symbol;
 }
 
-function getWeightRowFromSpotMarket(
+// Liability weights use SPOT_MARKET_WEIGHT_PRECISION (1e4), so a raw weight of
+// 10250 means a ratio of 1.025. LTV is 1/ratio, i.e. 1e4/weight as a fraction
+// or 1e6/weight as a percent. Computing from the raw BN keeps full precision —
+// deriving it from the floor()'d display string (e.g. 1.025 shown as "102%")
+// would silently produce a wrong figure for any non-whole-percent weight.
+function ltvPercentFromWeight(liabilityWeight: BN): string {
+  const weight = liabilityWeight.toNumber();
+  if (weight <= 0) return "N/A";
+  return ((1e6 / weight).toFixed(2)) + "%";
+}
+
+function getWeightAndLTVRows(
   account: SpotMarketAccount,
   oraclePrice: BN
-): AssetWeightRow {
+): { weightRow: AssetWeightRow; ltvRow: LTVRow } {
   const marketName = decodeName(account.name);
   const strictOraclePrice = new StrictOraclePrice(oraclePrice);
 
@@ -96,35 +107,38 @@ function getWeightRowFromSpotMarket(
     "Maintenance"
   );
 
+  const asset = stripPoolId(marketName);
+  const poolId = account.poolId;
+
   return {
-    asset: stripPoolId(marketName),
-    initialAssetWeight: Math.floor(initialAssetWeight.toNumber() / 100) + "%",
-    maintenanceAssetWeight:
-      Math.floor(maintenanceAssetWeight.toNumber() / 100) + "%",
-    initialLiabilityWeight:
-      Math.floor(initialLiabilityWeight.toNumber() / 100) + "%",
-    maintenanceLiabilityWeight:
-      Math.floor(maintenanceLiabilityWeight.toNumber() / 100) + "%",
-    poolId: account.poolId,
-    imfFactor: account.imfFactor / 1e6,
+    weightRow: {
+      asset,
+      initialAssetWeight: Math.floor(initialAssetWeight.toNumber() / 100) + "%",
+      maintenanceAssetWeight:
+        Math.floor(maintenanceAssetWeight.toNumber() / 100) + "%",
+      initialLiabilityWeight:
+        Math.floor(initialLiabilityWeight.toNumber() / 100) + "%",
+      maintenanceLiabilityWeight:
+        Math.floor(maintenanceLiabilityWeight.toNumber() / 100) + "%",
+      poolId,
+      imfFactor: +(account.imfFactor / 1e6).toFixed(6),
+    },
+    // LTV derived from the raw liability weights, not the display strings.
+    ltvRow: {
+      asset,
+      initialLTV: ltvPercentFromWeight(initialLiabilityWeight),
+      maxLTV: ltvPercentFromWeight(maintenanceLiabilityWeight),
+      poolId,
+    },
   };
 }
 
-function getLTVRowFromWeightRow(weightRow: AssetWeightRow): LTVRow {
-  return {
-    asset: weightRow.asset,
-    initialLTV:
-      (
-        (1 / Number(weightRow.initialLiabilityWeight.replace("%", ""))) *
-        10000
-      ).toFixed(2) + "%",
-    maxLTV:
-      (
-        (1 / Number(weightRow.maintenanceLiabilityWeight.replace("%", ""))) *
-        10000
-      ).toFixed(2) + "%",
-    poolId: weightRow.poolId,
-  };
+// Renders a margin ratio as "<pct>% / <leverage>x". A zero ratio would make
+// 1/ratio non-finite, so leverage falls back to "N/A" for that (unexpected) case.
+function marginCell(ratio: number): string {
+  const pct = `${(ratio * 100).toFixed(2)}%`;
+  const leverage = ratio > 0 ? `${(1 / ratio).toFixed(0)}x` : "N/A";
+  return `${pct} / ${leverage}`;
 }
 
 function getPerpMarginRow(market: PerpMarketAccount): PerpMarginRow | null {
@@ -140,12 +154,8 @@ function getPerpMarginRow(market: PerpMarketAccount): PerpMarginRow | null {
   return {
     index: market.marketIndex,
     name: decodeName(market.name),
-    initial: `${(initRatio * 100).toFixed(2)}% / ${(1 / initRatio).toFixed(
-      0
-    )}x`,
-    maintenance: `${(maintRatio * 100).toFixed(2)}% / ${(
-      1 / maintRatio
-    ).toFixed(0)}x`,
+    initial: marginCell(initRatio),
+    maintenance: marginCell(maintRatio),
     imfFactor,
   };
 }
@@ -245,9 +255,9 @@ async function loadOnChainData(rpcUrl: string): Promise<OnChainData> {
         oraclePrice = ZERO;
       }
 
-      const weightRow = getWeightRowFromSpotMarket(spotMarket, oraclePrice);
+      const { weightRow, ltvRow } = getWeightAndLTVRows(spotMarket, oraclePrice);
       assetWeights.push(weightRow);
-      ltv.push(getLTVRowFromWeightRow(weightRow));
+      ltv.push(ltvRow);
     });
 
     const perpMargin = perpMarkets
@@ -265,10 +275,12 @@ const getCachedOnChainData = unstable_cache(loadOnChainData, ["onchain-data"], {
 });
 
 export async function GET() {
-  const rpcUrl = process.env.RPC_URL ?? process.env.NEXT_PUBLIC_RPC_URL;
+  // Server-side only, intentionally not NEXT_PUBLIC_ so the RPC endpoint (and
+  // any embedded API key) never reaches the client bundle.
+  const rpcUrl = process.env.RPC_URL;
   if (!rpcUrl) {
     return NextResponse.json(
-      { error: "RPC_URL (or NEXT_PUBLIC_RPC_URL) is not configured" },
+      { error: "RPC_URL is not configured" },
       { status: 500, headers: { "Cache-Control": "no-store" } }
     );
   }
@@ -277,14 +289,13 @@ export async function GET() {
     const body = await getCachedOnChainData(rpcUrl);
     return NextResponse.json(body);
   } catch (error) {
+    // Log the full error server-side, but never echo error.message back to
+    // the client: RPC endpoints embed the API key in the URL and web3.js
+    // errors routinely include that URL, so returning it would leak the
+    // credential to any unauthenticated caller on an RPC outage.
     console.error("[api/onchain-data] failed to fetch on-chain data", error);
     return NextResponse.json(
-      {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to fetch on-chain data",
-      },
+      { error: "Failed to fetch on-chain data" },
       { status: 502, headers: { "Cache-Control": "no-store" } }
     );
   }
