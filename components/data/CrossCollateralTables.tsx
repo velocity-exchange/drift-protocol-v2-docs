@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import useSubscribedCrossCollateralDepositsData from "../../hooks/useSubscribedCrossCollatteralDepositsData";
+import { useOnChainData } from "../../hooks/useOnChainData";
 import modStyles from "../../content/protocol/getting-started/getting-started.module.css";
 
 export function AssetWeightsTable({ poolId }: { poolId: number }) {
@@ -14,11 +14,11 @@ export function AssetWeightsTable({ poolId }: { poolId: number }) {
     "IMF Factor",
   ];
 
-  const { weightData } = useSubscribedCrossCollateralDepositsData();
+  const { data } = useOnChainData();
 
   const poolWeightData = useMemo(
-    () => weightData?.filter((row) => row.poolId === poolId),
-    [weightData, poolId]
+    () => data?.assetWeights.filter((row) => row.poolId === poolId),
+    [data, poolId]
   );
 
   return (
@@ -33,10 +33,7 @@ export function AssetWeightsTable({ poolId }: { poolId: number }) {
       <tbody>
         {poolWeightData && poolWeightData.length > 0 ? (
           poolWeightData.map((row, i) => (
-            <tr
-              key={i}
-              className={row.flashUpdate ? modStyles.flashUpdate : ""}
-            >
+            <tr key={i}>
               <td>{row.asset}</td>
               <td>{row.initialAssetWeight}</td>
               <td>{row.maintenanceAssetWeight}</td>
@@ -60,10 +57,10 @@ export function AssetWeightsTable({ poolId }: { poolId: number }) {
 export function LTVTable({ poolId }: { poolId: number }) {
   const headings = ["Asset", "Initial LTV", "Max LTV"];
 
-  const { ltvData } = useSubscribedCrossCollateralDepositsData();
+  const { data } = useOnChainData();
   const poolLTVData = useMemo(
-    () => ltvData?.filter((row) => row.poolId === poolId),
-    [ltvData, poolId]
+    () => data?.ltv.filter((row) => row.poolId === poolId),
+    [data, poolId]
   );
 
   return (
@@ -78,10 +75,7 @@ export function LTVTable({ poolId }: { poolId: number }) {
       <tbody>
         {poolLTVData && poolLTVData.length > 0 ? (
           poolLTVData.map((row, i) => (
-            <tr
-              key={i}
-              className={row.flashUpdate ? modStyles.flashUpdate : ""}
-            >
+            <tr key={i}>
               <td>{row.asset}</td>
               <td>{row.initialLTV}</td>
               <td>{row.maxLTV}</td>
